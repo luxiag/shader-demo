@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "parcel": "parcel  src/shader_var/index.html",
-    "school": "shader-school"
+    "dev": "parcel  src/**/**.html"
   },
   "keywords": [],
   "author": "",

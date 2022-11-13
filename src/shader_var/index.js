@@ -28,8 +28,8 @@ camera.position.set(0, 0, 10)
 scene.add(camera)
 
 
-// 着色器配置
-const shaderMaterial = new THREE.ShaderMaterial({
+// 原始着色器配置
+const shaderMaterial = new THREE.RawShaderMaterial({
     vertexShader: basicVertexShader,
     fragmentShader: basicFragmentShader
 })
