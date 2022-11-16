@@ -27,25 +27,12 @@ const camera = new THREE.PerspectiveCamera(75,
 camera.position.set(0, 0, 10)
 scene.add(camera)
 
-const textureLoader = new THREE.TextureLoader()
 
-const texture = textureLoader.load('./texture/ca.jpeg')
-
-
-// 原始着色器配置
-const shaderMaterial = new THREE.RawShaderMaterial({
+// 着色器配置
+const shaderMaterial = new THREE.ShaderMaterial({
     vertexShader: basicVertexShader,
     fragmentShader: basicFragmentShader,
     side: THREE.DoubleSide,
-    // 传入数据
-    uniforms: {
-        uTime: {
-            value: 0
-        },
-        uTexture: {
-            value: texture
-        }
-    }
 })
 
 
@@ -73,6 +60,7 @@ scene.add(spotLight);
 
 
 
+
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer()
 // 设置渲染器大小
@@ -93,16 +81,15 @@ const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
 
 
-const axesHelper = new THREE.AxesHelper(5);
-scene.add(axesHelper);
+
 
 const clock = new THREE.Clock()
 // 每一帧进行渲染
 function render() {
-    let elapsedTime = clock.getElapsedTime()
+    let time = clock.getElapsedTime()
     controls.update()
     renderer.render(scene, camera)
-    shaderMaterial.uniforms.uTime.value = elapsedTime;
+
     requestAnimationFrame(render)
 }
 

@@ -9,13 +9,15 @@ import glsl from 'vite-plugin-glsl';
 export default defineConfig({
     resolve: {
         alias: {
-            "textures": path.resolve(__dirname, './textures')
+            // "@textures": path.resolve(__dirname, 'src/assets/textures')
         }
     },
     build: {
         rollupOptions: {
             input: {
-
+                hello: resolve(__dirname,'src/01_shader_hello'),
+                var: resolve(__dirname,'src/02_shader_var'),
+                func: resolve(__dirname,'src/03_shader_func')
 
 
 
@@ -39,6 +41,6 @@ export default defineConfig({
       defaultExtension: 'glsl',    // Shader suffix when no extension is specified
       compress: false,             // Compress output shader code
       watch: true,                 // Recompile shader on change
-      root: '/'                    // Directory for root imports
+      root: '/src/assets'                    // Directory for root imports
     })]
 })
