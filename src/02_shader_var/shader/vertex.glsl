@@ -8,7 +8,7 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 
-// threejs 自定义的
+
 uniform float uTime;
 
 // 传给fragment的

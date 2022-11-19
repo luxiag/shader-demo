@@ -29,7 +29,7 @@ scene.add(camera)
 
 const textureLoader = new THREE.TextureLoader()
 
-const texture = textureLoader.load('/textures/ca.jpeg')
+const texture = textureLoader.load('/assets/textures/ca.jpeg')
 
 
 // 原始着色器配置
