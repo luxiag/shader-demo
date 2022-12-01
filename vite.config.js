@@ -18,7 +18,8 @@ export default defineConfig({
                 hello: resolve(__dirname, 'src/01_shader_hello'),
                 var: resolve(__dirname, 'src/02_shader_var'),
                 func: resolve(__dirname, 'src/03_shader_func'),
-                flyLight: resolve(__dirname, "src/04_shader_flyLight")
+                flyLight: resolve(__dirname, "src/04_shader_flyLight"),
+                wave: resolve(__dirname, "src/05_shader_wave")
 
             }
         }

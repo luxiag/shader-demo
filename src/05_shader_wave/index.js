@@ -23,40 +23,77 @@ const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(75,
     window.innerWidth / window.innerHeight, 0.1, 1000);
 
-// 3.设置相机位置
-camera.position.set(0, 0, 10)
+// 设置相机位置
+camera.position.set(0, 0, 2)
+
+camera.aspect = window.innerWidth /window.innerHeight;
+//   更新摄像机的投影矩阵
+camera.updateProjectionMatrix();
 scene.add(camera)
 
 
-// 4.着色器配置
+
+const params = {
+    uWaresFrequency:20,
+    uScale:0.1
+}
+
+// 着色器配置
 const shaderMaterial = new THREE.ShaderMaterial({
     vertexShader: basicVertexShader,
-    fragmentShader: basicFragmentShader
+    fragmentShader: basicFragmentShader,
+    side:THREE.DoubleSide,
+    uniforms:{
+        uWaresFrequency:{
+            value:params.uWaresFrequency
+        },
+        uScale:{
+            value:params.uScale
+        }
+    },
+    transparent:true
 })
 
 
-// 5.创建平面
-const floor = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1, 64, 64), shaderMaterial)
-scene.add(floor)
+// 创建平面
+const plane = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1, 1024, 1024), shaderMaterial)
+plane.rotation.x = -Math.PI /2 ;
+scene.add(plane)
 
 
 
-// 6.初始化渲染器
-/*
-ShaderMaterial 只有使用 WebGLRenderer 才可以绘制正常，
- 因为 vertexShader 和 fragmentShader 属性中GLSL代码必须使用WebGL来编译并运行在GPU中。
-*/ 
+
+// 聚光灯
+const spotLight = new THREE.SpotLight(0xffffff);
+spotLight.position.set(10, 10, 10);
+spotLight.castShadow = true;
+
+spotLight.shadow.mapSize.width = 4096;
+spotLight.shadow.mapSize.height = 4096;
+
+
+scene.add(spotLight);
+
+
+
+
+
+
+
+
+// 初始化渲染器
 const renderer = new THREE.WebGLRenderer()
 // 设置渲染器大小
 renderer.setSize(window.innerWidth, window.innerHeight)
+
 renderer.shadowMap.enabled = true
+
 document.body.appendChild(renderer.domElement)
+
+
+
+
 renderer.render(scene, camera)
-
-
-
-
-
 
 // 创建轨道控制器
 const controls = new OrbitControls(camera, renderer.domElement)
@@ -66,18 +103,19 @@ controls.enableDamping = true
 
 
 
-
+const clock = new THREE.Clock()
 // 每一帧进行渲染
 function render() {
+    let time = clock.getElapsedTime()
     controls.update()
     renderer.render(scene, camera)
+
     requestAnimationFrame(render)
 }
 
 render()
 
 
-//  监听窗口变化
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix();
