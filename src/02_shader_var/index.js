@@ -12,8 +12,13 @@ import {
 } from 'three/examples/jsm/controls/OrbitControls'
 
 // 导入着色器
-import basicVertexShader from './shader/vertex.glsl'
-import basicFragmentShader from "./shader/fragment.glsl"
+import rawVertexShader from './raw_shader/vertex.glsl'
+import rawFragmentShader from "./raw_shader/fragment.glsl"
+
+
+import baseVertexShader from './shader/vertex.glsl'
+import baseFragmentShader from './shader/fragment.glsl'
+
 
 
 // 1.创建场景
@@ -32,10 +37,17 @@ const textureLoader = new THREE.TextureLoader()
 const texture = textureLoader.load('/assets/textures/ca.jpeg')
 
 
-// 原始着色器配置
-const shaderMaterial = new THREE.RawShaderMaterial({
-    vertexShader: basicVertexShader,
-    fragmentShader: basicFragmentShader,
+
+const baseShaderMaterial = new THREE.ShaderMaterial({
+    vertexShader: baseVertexShader,
+    fragmentShader: baseFragmentShader,
+    side:THREE.DoubleSide
+})
+
+// 此类的工作方式与ShaderMaterial类似，不同之处在于内置的uniforms和attributes的定义不会自动添加到GLSL shader代码中。
+const rawShaderMaterial = new THREE.RawShaderMaterial({
+    vertexShader: rawVertexShader,
+    fragmentShader: rawFragmentShader,
     side: THREE.DoubleSide,
     // 传入数据
     uniforms: {
@@ -48,10 +60,12 @@ const shaderMaterial = new THREE.RawShaderMaterial({
     }
 })
 
-
-// 创建平面
-const floor = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1, 64, 64), shaderMaterial)
+const floor = new THREE.Mesh(new THREE.PlaneBufferGeometry(1,1,64,64), baseShaderMaterial)
+floor.position.x =3;
 scene.add(floor)
+// 创建平面
+const rawFloor = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1, 64, 64), rawShaderMaterial)
+scene.add(rawFloor)
 
 
 
@@ -102,7 +116,7 @@ function render() {
     let elapsedTime = clock.getElapsedTime()
     controls.update()
     renderer.render(scene, camera)
-    shaderMaterial.uniforms.uTime.value = elapsedTime;
+    rawShaderMaterial.uniforms.uTime.value = elapsedTime;
     requestAnimationFrame(render)
 }
 

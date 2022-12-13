@@ -19,7 +19,11 @@ export default defineConfig({
                 var: resolve(__dirname, 'src/02_shader_var'),
                 func: resolve(__dirname, 'src/03_shader_func'),
                 flyLight: resolve(__dirname, "src/04_shader_flyLight"),
-                wave: resolve(__dirname, "src/05_shader_wave")
+                wave: resolve(__dirname, "src/05_shader_wave"),
+                pointer: resolve(__dirname, "src/06_shader_pointer"),
+                fireworks: resolve(__dirname, "src/07_shader_fireworks"),
+                machining: resolve(__dirname, "src/08_shader_machining"),
+                machining2: resolve(__dirname, "src/09_shader_machining2")
 
             }
         }

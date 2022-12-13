@@ -77,8 +77,6 @@ scene.add(spotLight);
 
 
 
-
-
 // 初始化渲染器
 const renderer = new THREE.WebGLRenderer({
     alpha: true
