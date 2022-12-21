@@ -39,12 +39,12 @@ scene.add(camera)
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 // 加载6张图片
 const envMapTexture = cubeTextureLoader.load([
-    "textures/environmentMaps/0/px.jpg",
-    "textures/environmentMaps/0/nx.jpg",
-    "textures/environmentMaps/0/py.jpg",
-    "textures/environmentMaps/0/ny.jpg",
-    "textures/environmentMaps/0/pz.jpg",
-    "textures/environmentMaps/0/nz.jpg",
+    "/assets/textures/environmentMaps/0/px.jpg",
+    "/assets/textures/environmentMaps/0/nx.jpg",
+    "/assets/textures/environmentMaps/0/py.jpg",
+    "/assets/textures/environmentMaps/0/ny.jpg",
+    "/assets/textures/environmentMaps/0/pz.jpg",
+    "/assets/textures/environmentMaps/0/nz.jpg",
 ])
 
 // 则该纹理贴图将会被设为场景中所有物理材质的环境贴图。
@@ -57,9 +57,9 @@ scene.background = envMapTexture;
 //texture 创建一个纹理贴图，将其应用到一个表面，或者作为反射/折射贴图。
 const textureLoader = new THREE.TextureLoader();
 
-const modelTexture = textureLoader.load('./models/LeePerrySmith/color.jpg');
+const modelTexture = textureLoader.load('/assets/models/LeePerrySmith/color.jpg');
 // 法线纹理
-const normalTexture = textureLoader.load('./models/LeePerrySmith/normal.jpg')
+const normalTexture = textureLoader.load('/assets/models/LeePerrySmith/normal.jpg')
 
 // 标准网格材质
 const material = new THREE.MeshStandardMaterial({

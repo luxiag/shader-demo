@@ -95,7 +95,7 @@ renderer.toneMappingExposure = 0.3
 const gltfLoader = new GLTFLoader()
 
 let LightBox = null
-gltfLoader.load("/assets/model/flyLight.glb", gltf => {
+gltfLoader.load("/assets/models/flyLight.glb", gltf => {
     // scene.add(gltf.scene)
     // 获取孔明灯
     LightBox = gltf.scene.children[1]
