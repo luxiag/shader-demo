@@ -23,7 +23,9 @@ export default defineConfig({
                 pointer: resolve(__dirname, "src/06_shader_pointer"),
                 fireworks: resolve(__dirname, "src/07_shader_fireworks"),
                 machining: resolve(__dirname, "src/08_shader_machining"),
-                machining2: resolve(__dirname, "src/09_shader_machining2")
+                machining2: resolve(__dirname, "src/09_shader_machining2"),
+                compound:resolve(__dirname,"src/10_shader_compound"),
+                compound2:resolve(__dirname,"src/11_shader_compound2")
 
             }
         }
